@@ -4,16 +4,18 @@ import { db } from '../db/database.js';
 import { env } from '../config/env.js';
 import { HttpError } from '../utils/httpError.js';
 
-const findUserByUsername = db.prepare(`
-  SELECT id, username, password, role
-  FROM users
-  WHERE username = ?
-`);
+function findUserByUsername(username) {
+  return db.prepare(`
+    SELECT id, username, password, role
+    FROM users
+    WHERE username = ?
+  `).get(username);
+}
 
 export async function login(req, res, next) {
   try {
     const { username, password } = req.body;
-    const user = findUserByUsername.get(username);
+    const user = findUserByUsername(username);
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       throw new HttpError(401, 'Invalid credentials.');

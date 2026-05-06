@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { db } from './db/database.js';
 import { env } from './config/env.js';
 import { initializeSchema } from './db/schema.js';
 import { sanitizeRequest } from './middlewares/sanitizeRequest.js';
@@ -36,9 +37,18 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.get('/', (req, res) => {
+  res.json({ message: 'OK' });
+});
+
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/sales', saleRouter);
+
+app.get('/usuarios', (req, res) => {
+  const users = db.prepare('SELECT * FROM users').all();
+  res.json(users);
+});
 
 app.use(notFound);
 app.use(errorHandler);
