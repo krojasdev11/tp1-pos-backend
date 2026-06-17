@@ -7,12 +7,25 @@ API REST para un pequeno almacen/kiosco con autenticacion JWT, autorizacion por 
 - Node.js 24 o superior
 - npm
 
-## Instalacion
+## Ejecucion
+
+1.Crear una carpeta.
+
+2.Clonar el repo backend y frontend dentro de la misma carpeta:
+git clone https://github.com/krojasdev11/tp1-pos-backend
+git clone https://github.com/krojasdev11/tp1-pos-frontend
+
+3. Abrir el proyecto backend e iniciar el proyecto:
 
 ```bash
 npm install
 npm run dev
 ```
+
+4. Abrir:
+
+```
+http://localhost:3000
 
 El servidor queda disponible en `http://localhost:3000`.
 
@@ -52,34 +65,36 @@ Authorization: Bearer <token>
 }
 ```
 
-# POS Almacen Fullstack
+# POS Almacen Front End
 
 Frontend en HTML, CSS y JavaScript para consumir la API REST del proyecto `tp1-pos-backend` conformada por NodeJS y Express.
 
 ## Requisitos
 
-- Backend ejecutandose en `http://localhost:3000`
-- Un servidor estatico local para abrir los modulos JavaScript
+- Backend del siguiente repo:https://github.com/krojasdev11/tp1-pos-backend
+ejecutandose en `http://localhost:3000`
 
 ## Ejecucion
 
-1.Clonar el repo:
-git clone https://github.com/krojasdev11/tp1-pos-backend
-cd tp1-pos-backend
+1.Crear una carpeta.
 
-2. Iniciar el proyecto:
+2.Clonar el repo backend y frontend dentro de la misma carpeta:
+git clone https://github.com/krojasdev11/tp1-pos-backend
+git clone https://github.com/krojasdev11/tp1-pos-frontend
+
+3. Abrir el proyecto backend e iniciar el proyecto:
 
 ```bash
 npm install
 npm run dev
 ```
 
-3. Abrir:
+4. Abrir:
 
 ```
 http://localhost:3000
-```
 
+El servidor queda disponible en `http://localhost:3000`.
 ## Usuarios de prueba
 
 | Usuario | Password | Rol |
