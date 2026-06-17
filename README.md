@@ -110,7 +110,7 @@ npm run dev
 4. Abrir el frontend:
 
 ```text
-http://localhost:5500
+http://localhost:3000
 ```
 
 ## Usuarios de prueba
