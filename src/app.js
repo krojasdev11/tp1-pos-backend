@@ -24,6 +24,7 @@ const publicPath = path.join(__dirname, '..', 'public');
 
 app.use(helmet());
 app.use(cors());
+app.use(express.static(publicPath));
 app.use(express.json({ limit: '20kb' }));
 app.use(requestLogger);
 app.use(rateLimit({
