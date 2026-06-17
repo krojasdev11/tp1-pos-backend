@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { db } from './db/database.js';
 import { env } from './config/env.js';
 import { initializeSchema } from './db/schema.js';
@@ -15,6 +17,10 @@ import { saleRouter } from './routes/saleRoutes.js';
 initializeSchema();
 
 export const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicPath = path.join(__dirname, '..', 'public');
 
 app.use(helmet());
 app.use(cors());
@@ -45,7 +51,7 @@ app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/sales', saleRouter);
 
-app.get('/usuarios', (req, res) => {
+app.get('/users', (req, res) => {
   const users = db.prepare('SELECT * FROM users').all();
   res.json(users);
 });
