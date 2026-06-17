@@ -1,167 +1,116 @@
-Sistema POS Full Stack - Gestión de Almacén
+# POS Almacen Backend
 
-Sistema de gestión de productos y ventas desarrollado como aplicación Full Stack utilizando Node.js, Express, SQLite y JavaScript. El proyecto implementa autenticación JWT, control de acceso por roles (RBAC), validaciones, sanitización de datos y buenas prácticas de seguridad tanto en backend como en frontend.
+API REST para un pequeno almacen/kiosco con autenticacion JWT, autorizacion por roles, validacion, sanitizacion, rate limiting, logs y SQLite local.
 
-Tecnologías Utilizadas
-Backend
-Node.js
-Express.js
-SQLite
-JWT (JSON Web Token)
-bcrypt
-express-validator
-Rate Limiting
-Middleware de logs
-Frontend
-HTML5
-CSS3
-JavaScript ES Modules
-Fetch API
-Arquitectura del Sistema
-Frontend (HTML + CSS + JavaScript)
-                |
-                | Authorization: Bearer <token>
-                v
-Backend (Node.js + Express)
-                |
-                v
-           SQLite
+## Requisitos
 
-El frontend consume la API REST del backend mediante peticiones HTTP autenticadas con JWT.
+- Node.js 24 o superior
+- npm
 
-Funcionalidades Implementadas
-Autenticación
-Login mediante usuario y contraseña.
-Generación de JWT.
-Logout.
-Protección de rutas mediante token.
-Almacenamiento del token en sessionStorage.
-Gestión de Productos
-Listado de productos.
-Búsqueda por categoría.
-Alta de productos (ADMIN).
-Modificación de productos (ADMIN).
-Eliminación de productos (ADMIN).
-Gestión de Ventas
-Creación de ventas.
-Carrito de compras.
-Actualización automática del stock.
-Consulta de ventas (ADMIN).
-Reportes
-Reporte general de ventas.
-Reporte de ventas del día.
-Acceso restringido a usuarios ADMIN.
-Seguridad
-Autenticación JWT.
-Autorización basada en roles (RBAC).
-Validación de datos en backend.
-Validación de formularios en frontend.
-Sanitización de entradas.
-Protección contra XSS utilizando textContent y creación segura de nodos DOM.
-No se utiliza innerHTML con datos dinámicos.
-Manejo controlado de errores.
-No se exponen stack traces ni detalles internos.
-Rate Limiting para protección básica contra abuso.
-Contraseñas almacenadas mediante hash.
-Roles del Sistema
-Rol	Permisos
-ADMIN	Gestionar productos, registrar ventas y consultar reportes
-USER	Consultar productos y registrar ventas
-Usuarios de Prueba
-Usuario	Contraseña	Rol
-admin	Admin123!	ADMIN
-empleado	User123!	USER
-Instalación
-1. Clonar el repositorio
-git clone <url-del-repositorio>
-cd tp1-pos-backend
-2. Instalar dependencias
+## Instalacion
+
+```bash
 npm install
-3. Inicializar datos de prueba (opcional)
-npm run seed
-4. Ejecutar el backend
 npm run dev
+```
 
-Servidor:
+El servidor queda disponible en `http://localhost:3000`.
 
-http://localhost:3000
-Ejecución del Frontend
+## Usuarios iniciales
 
-Abrir el frontend mediante un servidor estático.
+| Usuario | Password | Rol |
+| --- | --- | --- |
+| admin | Admin123! | ADMIN |
+| empleado | User123! | USER |
 
-Por ejemplo utilizando VS Code y Live Server:
+## Endpoints principales
 
-http://localhost:5500
+- `POST /auth/login`
+- `GET /products`
+- `GET /products?category=gaseosas`
+- `POST /products` solo `ADMIN`
+- `PUT /products/:id` solo `ADMIN`
+- `DELETE /products/:id` solo `ADMIN`
+- `POST /sales` `USER` y `ADMIN`
+- `GET /sales` solo `ADMIN`
+- `GET /sales/daily` solo `ADMIN`
 
-El frontend se conecta automáticamente con:
+Enviar el token como:
 
-http://localhost:3000
-Endpoints Principales
-Autenticación
-POST /auth/login
-Productos
-GET    /products
-GET    /products?category=gaseosas
-POST   /products
-PUT    /products/:id
-DELETE /products/:id
-Ventas
-POST /sales
-GET  /sales
-GET  /sales/daily
-Uso del Token JWT
-
-Todas las rutas protegidas requieren el encabezado:
-
+```http
 Authorization: Bearer <token>
+```
 
-Ejemplo:
+## Ejemplo de venta
 
-GET /products
-Authorization: Bearer eyJhbGciOi...
-Ejemplo de Venta
+```json
 {
   "items": [
-    {
-      "product_id": 1,
-      "quantity": 2
-    }
+    { "product_id": 1, "quantity": 2 }
   ],
   "payment": 5000
 }
-Estructura del Proyecto
-tp1-pos-backend/
-│
-├── src/
-├── database/
-├── middleware/
-├── routes/
-├── services/
-└── ...
-│
-└── tp1-pos-frontend/
-    │
-    ├── index.html
-    ├── css/
-    │   └── styles.css
-    │
-    └── js/
-        ├── api.js
-        ├── app.js
-        ├── auth.js
-        ├── config.js
-        ├── dom.js
-        ├── products.js
-        ├── sales.js
-        └── storage.js
-Verificaciones Realizadas
-Login funcional con JWT.
-Control de acceso por roles.
-CRUD de productos operativo.
-Registro de ventas funcional.
-Reportes funcionando correctamente.
-Backend validado mediante endpoint /health.
-Frontend probado en navegador.
-Módulos JavaScript verificados con node --check.
-Revisión de uso de innerHTML, eval y almacenamiento inseguro.
-Manejo de errores validado sin exposición de información sensible.
+```
+
+# POS Almacen Fullstack
+
+Frontend en HTML, CSS y JavaScript para consumir la API REST del proyecto `tp1-pos-backend` conformada por NodeJS y Express.
+
+## Requisitos
+
+- Backend ejecutandose en `http://localhost:3000`
+- Un servidor estatico local para abrir los modulos JavaScript
+
+## Ejecucion
+
+1.Clonar el repo:
+git clone https://github.com/krojasdev11/tp1-pos-backend
+cd tp1-pos-backend
+
+2. Iniciar el proyecto:
+
+```bash
+npm install
+npm run dev
+```
+
+3. Abrir:
+
+```
+http://localhost:3000
+```
+
+## Usuarios de prueba
+
+| Usuario | Password | Rol |
+| --- | --- | --- |
+| admin | Admin123! | ADMIN |
+| empleado | User123! | USER |
+
+## Funcionalidades
+
+- Login y logout con JWT.
+- Listado de productos protegido por token.
+- Alta, edicion y baja de productos para usuarios `ADMIN`.
+- Creacion de ventas para usuarios `ADMIN` y `USER`.
+- Reporte de ventas y ventas del dia para usuarios `ADMIN`.
+- Conexion con la API del backend en `http://localhost:3000`.
+
+## Estructura
+
+```text
+tp1-pos-frontend/
+  index.html
+  css/
+    styles.css
+  js/
+    api.js
+    app.js
+    auth.js
+    config.js
+    dom.js
+    products.js
+    sales.js
+    storage.js
+```
+
