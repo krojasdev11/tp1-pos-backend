@@ -9,11 +9,14 @@ API REST para un pequeno almacen/kiosco con autenticacion JWT, autorizacion por 
 
 ## Ejecucion
 
-1.Crear una carpeta.
+1. Crear una carpeta.
 
-2.Clonar el repo backend y frontend dentro de la misma carpeta:
+2. Clonar el repo backend y frontend dentro de la misma carpeta:
+
+```bash
 git clone https://github.com/krojasdev11/tp1-pos-backend
 git clone https://github.com/krojasdev11/tp1-pos-frontend
+```
 
 3. Abrir el proyecto backend e iniciar el proyecto:
 
@@ -24,15 +27,16 @@ npm run dev
 
 4. Abrir:
 
-```
+```text
 http://localhost:3000
+```
 
 El servidor queda disponible en `http://localhost:3000`.
 
 ## Usuarios iniciales
 
 | Usuario | Password | Rol |
-| --- | --- | --- |
+|----------|----------|----------|
 | admin | Admin123! | ADMIN |
 | empleado | User123! | USER |
 
@@ -59,11 +63,16 @@ Authorization: Bearer <token>
 ```json
 {
   "items": [
-    { "product_id": 1, "quantity": 2 }
+    {
+      "product_id": 1,
+      "quantity": 2
+    }
   ],
   "payment": 5000
 }
 ```
+
+---
 
 # POS Almacen Front End
 
@@ -71,16 +80,25 @@ Frontend en HTML, CSS y JavaScript para consumir la API REST del proyecto `tp1-p
 
 ## Requisitos
 
-- Backend del siguiente repo:https://github.com/krojasdev11/tp1-pos-backend
-ejecutandose en `http://localhost:3000`
+- Backend del siguiente repositorio:
+  - https://github.com/krojasdev11/tp1-pos-backend
+
+- Ejecutandose en:
+
+```text
+http://localhost:3000
+```
 
 ## Ejecucion
 
-1.Crear una carpeta.
+1. Crear una carpeta.
 
-2.Clonar el repo backend y frontend dentro de la misma carpeta:
+2. Clonar el repo backend y frontend dentro de la misma carpeta:
+
+```bash
 git clone https://github.com/krojasdev11/tp1-pos-backend
 git clone https://github.com/krojasdev11/tp1-pos-frontend
+```
 
 3. Abrir el proyecto backend e iniciar el proyecto:
 
@@ -89,16 +107,16 @@ npm install
 npm run dev
 ```
 
-4. Abrir:
+4. Abrir el frontend:
 
+```text
+http://localhost:5500
 ```
-http://localhost:3000
 
-El servidor queda disponible en `http://localhost:3000`.
 ## Usuarios de prueba
 
 | Usuario | Password | Rol |
-| --- | --- | --- |
+|----------|----------|----------|
 | admin | Admin123! | ADMIN |
 | empleado | User123! | USER |
 
@@ -115,17 +133,16 @@ El servidor queda disponible en `http://localhost:3000`.
 
 ```text
 tp1-pos-frontend/
-  index.html
-  css/
-    styles.css
-  js/
-    api.js
-    app.js
-    auth.js
-    config.js
-    dom.js
-    products.js
-    sales.js
-    storage.js
+├── index.html
+├── css/
+│   └── styles.css
+└── js/
+    ├── api.js
+    ├── app.js
+    ├── auth.js
+    ├── config.js
+    ├── dom.js
+    ├── products.js
+    ├── sales.js
+    └── storage.js
 ```
-
