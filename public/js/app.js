@@ -1,6 +1,6 @@
 import { initAuth } from './auth.js';
 import { getSession } from './storage.js';
-import { initProducts, getProducts } from './products.js';
+import { initProducts, getProducts } from './product.js';
 import { initSales, renderSaleProducts, syncCartProducts } from './sales.js';
 import { clearAlert, showAlert } from './dom.js';
 
